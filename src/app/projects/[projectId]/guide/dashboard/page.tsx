@@ -15,7 +15,7 @@ export default async function DashboardGuidePage({
         description="The project's landing page — a quick read on how far along scoring is."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>
           The Dashboard is what you land on when you open a project. It shows a handful of counts:
         </p>

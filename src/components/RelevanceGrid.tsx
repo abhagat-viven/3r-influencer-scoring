@@ -121,31 +121,31 @@ export default function RelevanceGrid({
   const gridTemplateColumns = COLUMNS.map((c) => `${colWidths[c.key]}px`).join(" ");
 
   return (
-    <section className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 space-y-4">
+    <section className="rounded-card border border-line bg-surface shadow-card p-6 space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-medium">Step 2 — Relevance ({remaining.length} pending)</h2>
+        <h2 className="font-medium text-ink">Step 2 — Relevance ({remaining.length} pending)</h2>
         {claudeConfigured ? (
           <button
             onClick={runClaude}
             disabled={isPending || remaining.length === 0}
-            className="rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-3 py-1.5 text-sm font-medium disabled:opacity-50"
+            className="rounded-md bg-primary hover:bg-primary-hover text-white px-3 py-1.5 text-sm font-medium disabled:opacity-50 disabled:hover:bg-primary transition-colors"
           >
             {isPending ? "Scoring…" : "Auto-score with Claude"}
           </button>
         ) : (
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-ink-soft">
             No ANTHROPIC_API_KEY set — score manually below, or add a key to Settings later.
           </span>
         )}
       </div>
 
       {remaining.length === 0 ? (
-        <p className="text-sm text-zinc-500">Nothing pending.</p>
+        <p className="text-sm text-ink-soft">Nothing pending.</p>
       ) : (
-        <div className="border border-zinc-200 dark:border-zinc-800 rounded-md overflow-x-auto select-none">
+        <div className="border border-line rounded-md overflow-x-auto select-none">
           {/* Header row */}
           <div
-            className="grid bg-zinc-50 dark:bg-zinc-800/60 border-b border-zinc-200 dark:border-zinc-800 text-xs font-medium text-zinc-500"
+            className="grid bg-surface-muted border-b border-line text-xs font-medium text-ink-soft"
             style={{ gridTemplateColumns }}
           >
             {COLUMNS.map((col) => (
@@ -154,7 +154,7 @@ export default function RelevanceGrid({
                 {col.resizable && (
                   <div
                     onMouseDown={(e) => startColResize(e, col.key)}
-                    className="absolute top-0 right-0 h-full w-1.5 cursor-col-resize hover:bg-blue-400/50"
+                    className="absolute top-0 right-0 h-full w-1.5 cursor-col-resize hover:bg-primary/40"
                   />
                 )}
               </div>
@@ -168,7 +168,7 @@ export default function RelevanceGrid({
             return (
               <div
                 key={a.handle}
-                className="relative grid border-b border-zinc-100 dark:border-zinc-800/50 last:border-b-0"
+                className="relative grid border-b border-line last:border-b-0"
                 style={{ gridTemplateColumns, height }}
               >
                 <div className="px-3 py-1.5 overflow-hidden">
@@ -176,7 +176,7 @@ export default function RelevanceGrid({
                     href={a.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium hover:underline block truncate"
+                    className="text-sm font-medium text-ink hover:underline block truncate"
                   >
                     @{a.handle}
                   </a>
@@ -184,12 +184,12 @@ export default function RelevanceGrid({
                     href={a.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline block truncate"
+                    className="text-xs text-primary hover:underline block truncate"
                   >
                     {a.link}
                   </a>
                 </div>
-                <div className="px-3 py-1.5 text-xs text-zinc-500 overflow-y-auto">{a.bio}</div>
+                <div className="px-3 py-1.5 text-xs text-ink-soft overflow-y-auto">{a.bio}</div>
                 <div className="px-3 py-1.5">
                   <select
                     value={d.score}
@@ -199,7 +199,7 @@ export default function RelevanceGrid({
                         [a.handle]: { ...draftFor(a.handle), score: e.target.value },
                       }))
                     }
-                    className="w-full h-full text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+                    className="w-full h-full text-sm rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   >
                     <option value="">Score</option>
                     <option value="1">1</option>
@@ -219,14 +219,14 @@ export default function RelevanceGrid({
                         [a.handle]: { ...draftFor(a.handle), rationale: e.target.value },
                       }))
                     }
-                    className="w-full h-full resize-none text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+                    className="w-full h-full resize-none text-sm rounded-md border border-line bg-surface text-ink placeholder:text-ink-faint px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   />
                 </div>
                 <div className="px-3 py-1.5 flex items-start">
                   <button
                     onClick={() => save(a.handle)}
                     disabled={isPending}
-                    className="rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-3 py-1.5 text-sm disabled:opacity-50"
+                    className="rounded-md bg-primary hover:bg-primary-hover text-white px-3 py-1.5 text-sm disabled:opacity-50 disabled:hover:bg-primary transition-colors"
                   >
                     Save
                   </button>
@@ -234,7 +234,7 @@ export default function RelevanceGrid({
 
                 <div
                   onMouseDown={(e) => startRowResize(e, a.handle)}
-                  className="absolute bottom-0 left-0 w-full h-1.5 cursor-row-resize hover:bg-blue-400/50"
+                  className="absolute bottom-0 left-0 w-full h-1.5 cursor-row-resize hover:bg-primary/40"
                 />
               </div>
             );

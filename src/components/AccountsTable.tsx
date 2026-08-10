@@ -207,27 +207,21 @@ export default function AccountsTable({
       {(followerFilters.size > 0 || statusFilters.size > 0) && (
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
           {followerFilters.size > 0 && (
-            <span className="text-zinc-500">
+            <span className="text-ink-soft">
               Followers:{" "}
               {reachOptions
                 .filter((o) => followerFilters.has(o.score))
                 .map((o) => o.label)
                 .join(", ")}{" "}
-              <button
-                onClick={clearRangeFilters}
-                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 underline"
-              >
+              <button onClick={clearRangeFilters} className="text-ink-soft hover:text-ink underline">
                 Clear
               </button>
             </span>
           )}
           {statusFilters.size > 0 && (
-            <span className="text-zinc-500">
+            <span className="text-ink-soft">
               Status: {Array.from(statusFilters).join(", ")}{" "}
-              <button
-                onClick={clearStatusFilters}
-                className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 underline"
-              >
+              <button onClick={clearStatusFilters} className="text-ink-soft hover:text-ink underline">
                 Clear
               </button>
             </span>
@@ -235,17 +229,17 @@ export default function AccountsTable({
         </div>
       )}
 
-      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-x-auto">
+      <div className="rounded-card border border-line bg-surface shadow-card overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="text-left text-zinc-500 border-b border-zinc-200 dark:border-zinc-800">
+          <tr className="text-left text-ink-soft border-b border-line">
             {headers.map((h) =>
               h.key === "followers" ? (
                 <th key={h.label} className="py-2 px-3 whitespace-nowrap relative">
                   <div className="flex items-center gap-1.5">
                     <span
                       onClick={() => toggleSort("followers")}
-                      className="cursor-pointer select-none hover:text-zinc-900 dark:hover:text-zinc-100"
+                      className="cursor-pointer select-none hover:text-ink"
                     >
                       {h.label}
                       {sortKey === "followers" && (sortDir === "desc" ? " ↓" : " ↑")}
@@ -256,9 +250,7 @@ export default function AccountsTable({
                         setOpenFilterMenu((o) => (o === "followers" ? null : "followers"));
                       }}
                       className={`text-xs font-normal rounded border px-1.5 py-0.5 ${
-                        followerFilters.size > 0
-                          ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                          : "border-zinc-300 dark:border-zinc-700"
+                        followerFilters.size > 0 ? "border-primary text-primary" : "border-line"
                       }`}
                     >
                       Filter{followerFilters.size > 0 ? ` (${followerFilters.size})` : ""} ▾
@@ -269,34 +261,32 @@ export default function AccountsTable({
                     <div
                       ref={filterMenuRef}
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute z-20 top-full left-3 mt-1 w-56 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg p-2 text-xs font-normal normal-case"
+                      className="absolute z-20 top-full left-3 mt-1 w-56 rounded-md border border-line bg-surface shadow-lg p-2 text-xs font-normal normal-case"
                     >
                       {reachOptions.map((opt) => (
                         <label
                           key={opt.score}
-                          className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
+                          className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-surface-muted cursor-pointer"
                         >
                           <input
                             type="checkbox"
                             checked={followerFilters.has(opt.score)}
                             onChange={() => toggleRangeFilter(opt.score)}
+                            className="accent-primary"
                           />
-                          <span className="flex-1">{opt.label}</span>
-                          <span className="text-zinc-400">
+                          <span className="flex-1 text-ink">{opt.label}</span>
+                          <span className="text-ink-faint">
                             {rows.filter((r) => r.reach_score === opt.score).length}
                           </span>
                         </label>
                       ))}
-                      <div className="border-t border-zinc-200 dark:border-zinc-800 mt-1 pt-1 flex justify-between">
-                        <button
-                          onClick={clearRangeFilters}
-                          className="text-zinc-500 hover:underline"
-                        >
+                      <div className="border-t border-line mt-1 pt-1 flex justify-between">
+                        <button onClick={clearRangeFilters} className="text-ink-soft hover:underline">
                           Clear
                         </button>
                         <button
                           onClick={() => setOpenFilterMenu(null)}
-                          className="text-zinc-900 dark:text-zinc-100 font-medium"
+                          className="text-ink font-medium"
                         >
                           Done
                         </button>
@@ -314,9 +304,7 @@ export default function AccountsTable({
                         setOpenFilterMenu((o) => (o === "status" ? null : "status"));
                       }}
                       className={`text-xs font-normal rounded border px-1.5 py-0.5 ${
-                        statusFilters.size > 0
-                          ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                          : "border-zinc-300 dark:border-zinc-700"
+                        statusFilters.size > 0 ? "border-primary text-primary" : "border-line"
                       }`}
                     >
                       Filter{statusFilters.size > 0 ? ` (${statusFilters.size})` : ""} ▾
@@ -327,34 +315,32 @@ export default function AccountsTable({
                     <div
                       ref={filterMenuRef}
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute z-20 top-full right-0 mt-1 w-48 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg p-2 text-xs font-normal normal-case"
+                      className="absolute z-20 top-full right-0 mt-1 w-48 rounded-md border border-line bg-surface shadow-lg p-2 text-xs font-normal normal-case"
                     >
                       {STATUS_OPTIONS.map((s) => (
                         <label
                           key={s}
-                          className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
+                          className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-surface-muted cursor-pointer"
                         >
                           <input
                             type="checkbox"
                             checked={statusFilters.has(s)}
                             onChange={() => toggleStatusFilter(s)}
+                            className="accent-primary"
                           />
-                          <span className="flex-1">{s}</span>
-                          <span className="text-zinc-400">
+                          <span className="flex-1 text-ink">{s}</span>
+                          <span className="text-ink-faint">
                             {rows.filter((r) => r.status === s).length}
                           </span>
                         </label>
                       ))}
-                      <div className="border-t border-zinc-200 dark:border-zinc-800 mt-1 pt-1 flex justify-between">
-                        <button
-                          onClick={clearStatusFilters}
-                          className="text-zinc-500 hover:underline"
-                        >
+                      <div className="border-t border-line mt-1 pt-1 flex justify-between">
+                        <button onClick={clearStatusFilters} className="text-ink-soft hover:underline">
                           Clear
                         </button>
                         <button
                           onClick={() => setOpenFilterMenu(null)}
-                          className="text-zinc-900 dark:text-zinc-100 font-medium"
+                          className="text-ink font-medium"
                         >
                           Done
                         </button>
@@ -366,7 +352,7 @@ export default function AccountsTable({
                 <th
                   key={h.label}
                   onClick={() => h.key && toggleSort(h.key)}
-                  className={`py-2 px-3 whitespace-nowrap ${h.key ? "cursor-pointer select-none hover:text-zinc-900 dark:hover:text-zinc-100" : ""}`}
+                  className={`py-2 px-3 whitespace-nowrap ${h.key ? "cursor-pointer select-none hover:text-ink" : ""}`}
                 >
                   {h.label}
                   {h.key === sortKey && (sortDir === "desc" ? " ↓" : " ↑")}
@@ -377,14 +363,14 @@ export default function AccountsTable({
         </thead>
         <tbody>
           {sorted.map((a) => (
-            <tr key={a.handle} className="border-b border-zinc-100 dark:border-zinc-800/50 align-top">
+            <tr key={a.handle} className="border-b border-line align-top hover:bg-surface-muted">
               <td className="py-2 px-3">
                 <div className="flex items-center gap-2">
                   <a
                     href={a.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    className="text-primary hover:underline"
                   >
                     @{a.handle}
                   </a>
@@ -392,22 +378,20 @@ export default function AccountsTable({
                     href={a.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 hover:underline"
+                    className="text-xs text-ink-faint hover:text-primary hover:underline"
                   >
                     {a.link}
                   </a>
-                  {a.is_private === 1 && (
-                    <span className="text-xs text-zinc-400">(private)</span>
-                  )}
+                  {a.is_private === 1 && <span className="text-xs text-ink-faint">(private)</span>}
                 </div>
               </td>
-              <td className="py-2 px-3">{fmt(a.followers)}</td>
-              <td className="py-2 px-3">{fmt(a.reach_score)}</td>
-              <td className="py-2 px-3">
+              <td className="py-2 px-3 text-ink">{fmt(a.followers)}</td>
+              <td className="py-2 px-3 text-ink">{fmt(a.reach_score)}</td>
+              <td className="py-2 px-3 text-ink">
                 {fmt(a.resonance_score)}
                 {a.resonance_score != null && a.resonance_stale === 1 && (
                   <span
-                    className="ml-1 text-amber-600 dark:text-amber-400"
+                    className="ml-1 text-warning"
                     title="No posts within the last 90 days — this score is based on older content, not current performance."
                   >
                     ⚠
@@ -420,7 +404,7 @@ export default function AccountsTable({
                     <select
                       value={editScore}
                       onChange={(e) => setEditScore(e.target.value)}
-                      className="w-20 text-sm rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-1.5 py-0.5"
+                      className="w-20 text-sm rounded border border-line bg-surface text-ink px-1.5 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                     >
                       <option value="">Score</option>
                       <option value="1">1</option>
@@ -433,18 +417,18 @@ export default function AccountsTable({
                       value={editRationale}
                       onChange={(e) => setEditRationale(e.target.value)}
                       rows={2}
-                      className="text-sm rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-1.5 py-0.5"
+                      className="text-sm rounded border border-line bg-surface text-ink px-1.5 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                     />
                     <div className="flex gap-2">
                       <button
                         onClick={() => saveEdit(a.handle)}
-                        className="text-xs rounded bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-2 py-1"
+                        className="text-xs rounded bg-primary hover:bg-primary-hover text-white px-2 py-1 transition-colors"
                       >
                         Save
                       </button>
                       <button
                         onClick={() => setEditing(null)}
-                        className="text-xs rounded border border-zinc-300 dark:border-zinc-700 px-2 py-1"
+                        className="text-xs rounded border border-line text-ink-soft hover:text-ink px-2 py-1"
                       >
                         Cancel
                       </button>
@@ -453,19 +437,27 @@ export default function AccountsTable({
                 ) : (
                   <button
                     onClick={() => startEdit(a)}
-                    className="text-left hover:underline decoration-dotted"
+                    className="text-left text-ink hover:underline decoration-dotted"
                     title={a.relevance_rationale ?? "Click to set"}
                   >
                     {fmt(a.relevance_score)}
                   </button>
                 )}
               </td>
-              <td className="py-2 px-3 font-medium">{fmt(a.composite_score, 2)}</td>
+              <td className="py-2 px-3">
+                {a.composite_score != null ? (
+                  <span className="inline-flex items-center rounded-full bg-primary-soft text-primary-soft-ink font-semibold px-2 py-0.5">
+                    {fmt(a.composite_score, 2)}
+                  </span>
+                ) : (
+                  <span className="text-ink-faint">—</span>
+                )}
+              </td>
               <td className="py-2 px-3">
                 <select
                   value={a.status}
                   onChange={(e) => changeStatus(a.handle, e.target.value)}
-                  className="text-sm rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-1.5 py-0.5"
+                  className="text-sm rounded border border-line bg-surface text-ink px-1.5 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 >
                   {STATUS_OPTIONS.map((s) => (
                     <option key={s} value={s}>

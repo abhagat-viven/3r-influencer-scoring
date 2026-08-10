@@ -16,7 +16,7 @@ export default async function AccountsGuidePage({
         description="The candidate shortlist, ranked by composite 3R score — where day-to-day review happens."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>
           Every candidate in the project, with Reach, Resonance, Relevance, and the composite
           score that combines all three using the weights set in Settings.
@@ -29,7 +29,7 @@ export default async function AccountsGuidePage({
         </MockFrame>
       </div>
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4 mt-6">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4 mt-6">
         <ul className="list-disc list-inside space-y-1.5">
           <li>Click a column header to sort by it.</li>
           <li>Filter by follower range or status using the small filter icons in each header.</li>

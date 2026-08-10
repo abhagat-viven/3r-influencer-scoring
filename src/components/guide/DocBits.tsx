@@ -3,15 +3,15 @@ import Link from "next/link";
 export function DocHeader({ title, description }: { title: string; description: string }) {
   return (
     <div className="mb-8">
-      <h1 className="text-2xl font-semibold">{title}</h1>
-      <p className="text-zinc-500 mt-1">{description}</p>
+      <h1 className="text-2xl font-semibold text-ink">{title}</h1>
+      <p className="text-ink-soft mt-1">{description}</p>
     </div>
   );
 }
 
 export function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-md border-l-4 border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/40 px-4 py-3 text-sm text-zinc-700 dark:text-zinc-300">
+    <div className="rounded-md border-l-4 border-l-primary bg-surface-muted px-4 py-3 text-sm text-ink-soft">
       {children}
     </div>
   );
@@ -20,7 +20,7 @@ export function Callout({ children }: { children: React.ReactNode }) {
 export function MockFrame({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <p className="text-xs font-medium text-zinc-400 uppercase tracking-wide">{label}</p>
+      <p className="text-xs font-medium text-ink-faint uppercase tracking-wide">{label}</p>
       {children}
     </div>
   );
@@ -34,22 +34,16 @@ export function PrevNext({
   next?: { href: string; label: string };
 }) {
   return (
-    <div className="mt-12 pt-6 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-sm">
+    <div className="mt-12 pt-6 border-t border-line flex items-center justify-between text-sm">
       {prev ? (
-        <Link
-          href={prev.href}
-          className="text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white"
-        >
+        <Link href={prev.href} className="text-ink-soft hover:text-ink">
           ← {prev.label}
         </Link>
       ) : (
         <span />
       )}
       {next ? (
-        <Link
-          href={next.href}
-          className="text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white text-right"
-        >
+        <Link href={next.href} className="text-ink-soft hover:text-ink text-right">
           {next.label} →
         </Link>
       ) : (

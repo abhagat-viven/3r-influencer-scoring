@@ -13,7 +13,7 @@ export default async function GuideLayout({
     <div className="flex gap-10">
       <aside className="hidden lg:block w-56 shrink-0">
         <div className="sticky top-8">
-          <p className="px-3 text-xs font-medium uppercase tracking-wide text-zinc-400 mb-2">
+          <p className="px-3 text-xs font-medium uppercase tracking-wide text-ink-faint mb-2">
             Guide
           </p>
           <GuideNav projectId={projectId} />

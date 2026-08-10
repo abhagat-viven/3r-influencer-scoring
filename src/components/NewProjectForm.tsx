@@ -24,25 +24,25 @@ export default function NewProjectForm() {
   }
 
   return (
-    <div className="rounded-lg border border-dashed border-zinc-300 dark:border-zinc-700 p-6 space-y-3">
-      <h2 className="font-medium">New project</h2>
+    <div className="rounded-card border border-dashed border-line-strong p-6 space-y-3">
+      <h2 className="font-medium text-ink">New project</h2>
       <div className="flex items-center gap-2">
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && create()}
           placeholder="e.g. Summer 2026 campaign"
-          className="flex-1 text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-1.5"
+          className="flex-1 text-sm rounded-md border border-line bg-surface text-ink placeholder:text-ink-faint px-3 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
         />
         <button
           onClick={create}
           disabled={isPending || !name.trim()}
-          className="rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-4 py-1.5 text-sm font-medium disabled:opacity-50"
+          className="rounded-md bg-primary hover:bg-primary-hover text-white px-4 py-1.5 text-sm font-medium disabled:opacity-50 disabled:hover:bg-primary transition-colors"
         >
           {isPending ? "Creating…" : "Create"}
         </button>
       </div>
-      {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="text-sm text-danger">{error}</p>}
     </div>
   );
 }

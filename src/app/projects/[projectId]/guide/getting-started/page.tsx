@@ -15,7 +15,7 @@ export default async function GettingStartedPage({
         description="How a project goes from an empty list of handles to a ranked, scored shortlist."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>
           Each campaign or client list lives in its own <strong>project</strong>. A project has
           its own accounts, its own Brand &amp; ICP statement, and its own 3R scoring settings —

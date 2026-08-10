@@ -61,22 +61,22 @@ export default function PipelineRunner({
 
   return (
     <div className="space-y-8">
-      <section className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 space-y-4">
+      <section className="rounded-card border border-line bg-surface shadow-card p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="font-medium">
+          <h2 className="font-medium text-ink">
             Step 1 — Scrape ({notScraped.length} not yet scraped)
           </h2>
-          <div className="text-sm text-zinc-500">
+          <div className="text-sm text-ink-soft">
             {budgetLoaded ? (
               budget ? (
                 <>
                   ${budget.spentUsd.toFixed(2)} spent / ${budget.planLimitUsd.toFixed(2)} plan ·{" "}
-                  <span className={overBudget ? "text-red-600 dark:text-red-400 font-medium" : ""}>
+                  <span className={overBudget ? "text-danger font-medium" : ""}>
                     ${budget.remainingUsd.toFixed(2)} remaining
                   </span>
                 </>
               ) : (
-                <span className="text-amber-600 dark:text-amber-400">
+                <span className="text-warning">
                   Couldn&apos;t reach Apify to check remaining budget
                 </span>
               )
@@ -87,50 +87,49 @@ export default function PipelineRunner({
         </div>
 
         {notScraped.length === 0 ? (
-          <p className="text-sm text-zinc-500">All candidates have been scraped.</p>
+          <p className="text-sm text-ink-soft">All candidates have been scraped.</p>
         ) : (
           <>
-            <div className="max-h-64 overflow-y-auto border border-zinc-100 dark:border-zinc-800 rounded-md">
+            <div className="max-h-64 overflow-y-auto border border-line rounded-md">
               <table className="w-full text-sm">
                 <tbody>
                   {notScraped.map((a) => (
-                    <tr key={a.handle} className="border-b border-zinc-100 dark:border-zinc-800/50">
+                    <tr key={a.handle} className="border-b border-line hover:bg-surface-muted">
                       <td className="py-1.5 px-3 w-8">
                         <input
                           type="checkbox"
                           checked={selected.has(a.handle)}
                           onChange={() => toggle(a.handle)}
+                          className="accent-primary"
                         />
                       </td>
                       <td className="py-1.5 px-3">
-                        <span className="mr-2">@{a.handle}</span>
+                        <span className="mr-2 text-ink">@{a.handle}</span>
                         <a
                           href={a.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                          className="text-xs text-primary hover:underline"
                         >
                           {a.link}
                         </a>
                       </td>
-                      <td className="py-1.5 px-3 text-zinc-500">{a.keyword_categories}</td>
+                      <td className="py-1.5 px-3 text-ink-soft">{a.keyword_categories}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <div className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3 flex items-center justify-between">
-              <div className="text-sm">
+            <div className="rounded-md border border-line bg-surface-muted px-4 py-3 flex items-center justify-between">
+              <div className="text-sm text-ink">
                 <span className="font-medium">{selectedCount} account(s) selected</span>
-                <span className="text-zinc-500"> · estimated cost </span>
+                <span className="text-ink-soft"> · estimated cost </span>
                 <span className="font-medium">${cost.toFixed(2)}</span>
-                <span className="text-zinc-500"> (${COST_PER_PROFILE_USD.toFixed(4)}/profile)</span>
+                <span className="text-ink-soft"> (${COST_PER_PROFILE_USD.toFixed(4)}/profile)</span>
               </div>
               {overBudget && (
-                <span className="text-xs text-red-600 dark:text-red-400 font-medium">
-                  Exceeds remaining budget
-                </span>
+                <span className="text-xs text-danger font-medium">Exceeds remaining budget</span>
               )}
             </div>
 
@@ -138,7 +137,7 @@ export default function PipelineRunner({
               <button
                 onClick={() => setConfirming(true)}
                 disabled={isPending || selectedCount === 0}
-                className="rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-4 py-2 text-sm font-medium disabled:opacity-50"
+                className="rounded-md bg-primary hover:bg-primary-hover text-white px-4 py-2 text-sm font-medium disabled:opacity-50 disabled:hover:bg-primary transition-colors"
               >
                 Review &amp; run scrape on {selectedCount} account(s)
               </button>
@@ -147,8 +146,8 @@ export default function PipelineRunner({
                 <button
                   onClick={runScrape}
                   disabled={isPending}
-                  className={`rounded-md px-4 py-2 text-sm font-medium text-white disabled:opacity-50 ${
-                    overBudget ? "bg-red-600" : "bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900"
+                  className={`rounded-md px-4 py-2 text-sm font-medium text-white disabled:opacity-50 transition-colors ${
+                    overBudget ? "bg-danger hover:bg-danger" : "bg-primary hover:bg-primary-hover"
                   }`}
                 >
                   {isPending
@@ -158,13 +157,13 @@ export default function PipelineRunner({
                 <button
                   onClick={() => setConfirming(false)}
                   disabled={isPending}
-                  className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                  className="text-sm text-ink-soft hover:text-ink"
                 >
                   Cancel
                 </button>
               </div>
             )}
-            {scrapeResult && <p className="text-sm text-zinc-600 dark:text-zinc-400">{scrapeResult}</p>}
+            {scrapeResult && <p className="text-sm text-ink-soft">{scrapeResult}</p>}
           </>
         )}
       </section>

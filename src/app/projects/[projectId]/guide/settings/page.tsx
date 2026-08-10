@@ -15,7 +15,7 @@ export default async function SettingsGuidePage({
         description="Brand & ICP, scoring weights, and API keys."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>Three sections, two of them scoped to the current project:</p>
         <ul className="list-disc list-inside space-y-1.5">
           <li>

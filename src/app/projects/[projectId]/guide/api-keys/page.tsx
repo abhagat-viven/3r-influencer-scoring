@@ -15,7 +15,7 @@ export default async function ApiKeysGuidePage({
         description="Optional. Use your own Apify and Anthropic accounts instead of the app's default."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>
           Set from the API Keys section in Settings, but shared across this whole local
           instance rather than scoped to any one project — a key you add carries over to every

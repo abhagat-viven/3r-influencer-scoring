@@ -29,11 +29,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
-        <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+      <body className="min-h-full flex flex-col bg-canvas text-ink">
+        <header className="border-b border-line bg-surface">
           <div className="mx-auto max-w-6xl px-6 py-4">
-            <Link href="/" className="font-semibold text-lg">
-              3R Influencer Scoring
+            <Link href="/" className="font-semibold text-lg flex items-center gap-2">
+              <span className="text-primary">3R</span> Influencer Scoring
             </Link>
           </div>
         </header>

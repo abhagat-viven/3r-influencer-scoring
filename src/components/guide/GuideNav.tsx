@@ -27,8 +27,8 @@ export default function GuideNav({ projectId }: { projectId: string }) {
             href={href}
             className={
               active
-                ? "block rounded-md px-3 py-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-medium"
-                : "block rounded-md px-3 py-1.5 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800"
+                ? "block rounded-md px-3 py-1.5 bg-primary-soft text-primary-soft-ink font-medium"
+                : "block rounded-md px-3 py-1.5 text-ink-soft hover:text-ink hover:bg-surface-muted"
             }
           >
             {s.label}

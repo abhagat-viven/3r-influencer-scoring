@@ -15,11 +15,11 @@ export default async function PipelineGuidePage({
         description="Runs the actual scoring work — scrape, then Reach/Resonance/Relevance."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>Pipeline runs in two steps, and you can re-run either one independently:</p>
 
         <div className="space-y-2">
-          <p className="font-medium text-zinc-800 dark:text-zinc-200">1. Scrape</p>
+          <p className="font-medium text-ink">1. Scrape</p>
           <p>
             Pulls current follower count, bio, privacy status, and recent posts for each candidate
             via Apify, then computes:
@@ -41,7 +41,7 @@ export default async function PipelineGuidePage({
         </div>
 
         <div className="space-y-2">
-          <p className="font-medium text-zinc-800 dark:text-zinc-200">2. Relevance</p>
+          <p className="font-medium text-ink">2. Relevance</p>
           <p>
             Scored either manually per account in the Accounts table, or in bulk from Pipeline with{" "}
             <strong>&quot;Auto-score with Claude&quot;</strong>, which judges fit against your

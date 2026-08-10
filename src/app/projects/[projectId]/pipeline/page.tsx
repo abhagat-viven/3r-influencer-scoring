@@ -22,7 +22,7 @@ export default async function PipelinePage({
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Pipeline</h1>
-          <p className="text-zinc-500 mt-1">
+          <p className="text-ink-soft mt-1">
             Scrape follower counts + recent-post engagement via Apify, then score Relevance
             against your brand statement and ICP.
           </p>

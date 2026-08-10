@@ -18,7 +18,7 @@ export default function ProjectSwitcher({
       <select
         value={currentId}
         onChange={(e) => router.push(`/projects/${e.target.value}`)}
-        className="rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+        className="rounded-md border border-line bg-surface px-2 py-1 text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
       >
         {projects.map((p) => (
           <option key={p.id} value={p.id}>
@@ -26,10 +26,7 @@ export default function ProjectSwitcher({
           </option>
         ))}
       </select>
-      <Link
-        href="/"
-        className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 underline decoration-dotted"
-      >
+      <Link href="/" className="text-ink-soft hover:text-ink underline decoration-dotted">
         All projects
       </Link>
     </div>

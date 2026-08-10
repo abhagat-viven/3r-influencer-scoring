@@ -33,16 +33,16 @@ export default function ImportUploader({
   }
 
   return (
-    <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 space-y-4">
+    <div className="rounded-card border border-line bg-surface shadow-card p-6 space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-medium">Following export</h2>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h2 className="font-medium text-ink">Following export</h2>
+          <p className="text-sm text-ink-soft mt-1">
             Instagram → Settings → Accounts Center → Your information and permissions →
             Export your information → select &quot;Following&quot; only, JSON format.
           </p>
         </div>
-        <span className="text-sm text-zinc-500 whitespace-nowrap">
+        <span className="text-sm text-ink-soft whitespace-nowrap">
           {currentTotal.toLocaleString()} currently imported
         </span>
       </div>
@@ -56,18 +56,18 @@ export default function ImportUploader({
             const file = e.target.files?.[0];
             if (file) handleFile(file);
           }}
-          className="text-sm file:mr-3 file:rounded-md file:border-0 file:bg-zinc-900 file:text-white file:px-3 file:py-1.5 file:text-sm dark:file:bg-zinc-100 dark:file:text-zinc-900"
+          className="text-sm text-ink-soft file:mr-3 file:rounded-md file:border-0 file:bg-primary file:hover:bg-primary-hover file:text-white file:px-3 file:py-1.5 file:text-sm file:font-medium file:cursor-pointer"
         />
-        {isPending && <span className="text-sm text-zinc-500">Parsing…</span>}
+        {isPending && <span className="text-sm text-ink-soft">Parsing…</span>}
       </div>
 
       {result && (
-        <p className="text-sm text-green-700 dark:text-green-400">
+        <p className="text-sm text-success-ink">
           Imported {result.total.toLocaleString()} accounts — {result.candidates} flagged as
           candidates by keyword match.
         </p>
       )}
-      {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="text-sm text-danger">{error}</p>}
     </div>
   );
 }

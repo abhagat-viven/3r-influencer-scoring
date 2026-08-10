@@ -34,7 +34,7 @@ export default function ExportCsvButton({
       disabled={isPending}
       className={
         className ??
-        "rounded-md border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm font-medium disabled:opacity-50"
+        "rounded-md border border-line text-ink hover:bg-surface-muted px-3 py-1.5 text-sm font-medium disabled:opacity-50"
       }
     >
       {isPending ? "Exporting…" : "Export CSV"}

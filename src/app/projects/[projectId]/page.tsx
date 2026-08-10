@@ -5,9 +5,9 @@ export const dynamic = "force-dynamic";
 
 function stat(label: string, value: number | string, href?: string) {
   const content = (
-    <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6">
-      <div className="text-3xl font-semibold">{value}</div>
-      <div className="text-sm text-zinc-500 mt-1">{label}</div>
+    <div className="rounded-card border border-line bg-surface shadow-card p-6">
+      <div className="text-3xl font-semibold text-primary">{value}</div>
+      <div className="text-sm text-ink-soft mt-1">{label}</div>
     </div>
   );
   return href ? (
@@ -51,8 +51,8 @@ export default async function Dashboard({
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
-        <p className="text-zinc-500 mt-1">
+        <h1 className="text-2xl font-semibold text-ink">Dashboard</h1>
+        <p className="text-ink-soft mt-1">
           Reach · Resonance · Relevance scoring for your Instagram following list.
         </p>
       </div>
@@ -65,20 +65,27 @@ export default async function Dashboard({
       </div>
 
       {topAccounts.length > 0 && (
-        <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6">
-          <h2 className="font-medium mb-4">Top scored accounts</h2>
-          <div className="space-y-2">
+        <div className="rounded-card border border-line bg-surface shadow-card p-6">
+          <h2 className="font-medium text-ink mb-4">Top scored accounts</h2>
+          <div className="space-y-1">
             {topAccounts.map((a) => (
-              <div key={a.handle} className="flex items-center justify-between text-sm">
-                <span>@{a.handle}</span>
-                <span className="text-zinc-500">{a.followers?.toLocaleString()} followers</span>
-                <span className="font-medium">{a.composite_score.toFixed(2)}</span>
+              <div
+                key={a.handle}
+                className="grid grid-cols-[1fr_1fr_auto] items-baseline gap-4 text-sm text-ink py-1"
+              >
+                <span className="truncate">@{a.handle}</span>
+                <span className="text-ink-soft tabular-nums text-center">
+                  {a.followers?.toLocaleString()} followers
+                </span>
+                <span className="font-medium tabular-nums text-right w-12">
+                  {a.composite_score.toFixed(2)}
+                </span>
               </div>
             ))}
           </div>
           <Link
             href={`/projects/${projectId}/accounts`}
-            className="inline-block mt-4 text-sm text-blue-600 dark:text-blue-400"
+            className="inline-block mt-4 text-sm text-primary hover:underline"
           >
             View all accounts →
           </Link>
@@ -86,11 +93,11 @@ export default async function Dashboard({
       )}
 
       {totalFollowing === 0 && (
-        <div className="rounded-lg border border-dashed border-zinc-300 dark:border-zinc-700 p-8 text-center">
-          <p className="text-zinc-500">No data yet.</p>
+        <div className="rounded-card border border-dashed border-line-strong p-8 text-center">
+          <p className="text-ink-soft">No data yet.</p>
           <Link
             href={`/projects/${projectId}/import`}
-            className="inline-block mt-3 text-blue-600 dark:text-blue-400 font-medium"
+            className="inline-block mt-3 text-primary font-medium hover:underline"
           >
             Import your Instagram following export →
           </Link>

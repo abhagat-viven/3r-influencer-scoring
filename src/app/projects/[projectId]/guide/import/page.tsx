@@ -16,7 +16,7 @@ export default async function ImportGuidePage({
         description="Bring creators into a project from a file."
       />
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4">
         <p>Three kinds of input are supported:</p>
         <ul className="list-disc list-inside space-y-1.5">
           <li>
@@ -44,7 +44,7 @@ export default async function ImportGuidePage({
         </MockFrame>
       </div>
 
-      <div className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4 mt-6">
+      <div className="text-sm text-ink-soft leading-relaxed space-y-4 mt-6">
         <p>
           Files are parsed in memory on upload and never written to disk — only the parsed rows
           are stored, in the project&apos;s database.

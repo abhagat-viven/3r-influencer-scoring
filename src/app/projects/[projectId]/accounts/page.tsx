@@ -20,7 +20,7 @@ export default async function AccountsPage({
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-semibold">Accounts</h1>
-          <p className="text-zinc-500 mt-1">
+          <p className="text-ink-soft mt-1">
             Candidate shortlist ranked by composite 3R score. Click a column to sort; edit
             Relevance or status inline.
           </p>

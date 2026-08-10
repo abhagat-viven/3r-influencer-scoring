@@ -82,39 +82,39 @@ export default function ScoringSettingsForm({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 space-y-6">
+      <div className="rounded-card border border-line bg-surface shadow-card p-6 space-y-6">
         <div>
-          <label className="text-sm font-medium block mb-2">Reach thresholds (followers)</label>
+          <label className="text-sm font-medium text-ink block mb-2">Reach thresholds (followers)</label>
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-xs text-zinc-500">Score 1: &lt;</span>
+            <span className="text-xs text-ink-soft">Score 1: &lt;</span>
             <input
               type="number"
               value={reachT[0]}
               onChange={(e) => setReachT([e.target.value, reachT[1], reachT[2], reachT[3]])}
-              className="w-24 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-24 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">2: &lt;</span>
+            <span className="text-xs text-ink-soft">2: &lt;</span>
             <input
               type="number"
               value={reachT[1]}
               onChange={(e) => setReachT([reachT[0], e.target.value, reachT[2], reachT[3]])}
-              className="w-24 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-24 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">3: &lt;</span>
+            <span className="text-xs text-ink-soft">3: &lt;</span>
             <input
               type="number"
               value={reachT[2]}
               onChange={(e) => setReachT([reachT[0], reachT[1], e.target.value, reachT[3]])}
-              className="w-24 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-24 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">4: &lt;</span>
+            <span className="text-xs text-ink-soft">4: &lt;</span>
             <input
               type="number"
               value={reachT[3]}
               onChange={(e) => setReachT([reachT[0], reachT[1], reachT[2], e.target.value])}
-              className="w-24 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-24 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">Score 5: above that</span>
+            <span className="text-xs text-ink-soft">Score 5: above that</span>
           </div>
         </div>
 
@@ -123,7 +123,7 @@ export default function ScoringSettingsForm({
             Resonance thresholds (median engagement rate, %)
           </label>
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-xs text-zinc-500">Score 1: &lt;</span>
+            <span className="text-xs text-ink-soft">Score 1: &lt;</span>
             <input
               type="number"
               step="0.1"
@@ -131,9 +131,9 @@ export default function ScoringSettingsForm({
               onChange={(e) =>
                 setResonanceT([e.target.value, resonanceT[1], resonanceT[2], resonanceT[3]])
               }
-              className="w-20 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-20 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">%  2: &lt;</span>
+            <span className="text-xs text-ink-soft">%  2: &lt;</span>
             <input
               type="number"
               step="0.1"
@@ -141,9 +141,9 @@ export default function ScoringSettingsForm({
               onChange={(e) =>
                 setResonanceT([resonanceT[0], e.target.value, resonanceT[2], resonanceT[3]])
               }
-              className="w-20 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-20 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">%  3: &lt;</span>
+            <span className="text-xs text-ink-soft">%  3: &lt;</span>
             <input
               type="number"
               step="0.1"
@@ -151,9 +151,9 @@ export default function ScoringSettingsForm({
               onChange={(e) =>
                 setResonanceT([resonanceT[0], resonanceT[1], e.target.value, resonanceT[3]])
               }
-              className="w-20 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-20 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">%  4: &lt;</span>
+            <span className="text-xs text-ink-soft">%  4: &lt;</span>
             <input
               type="number"
               step="0.1"
@@ -161,11 +161,11 @@ export default function ScoringSettingsForm({
               onChange={(e) =>
                 setResonanceT([resonanceT[0], resonanceT[1], resonanceT[2], e.target.value])
               }
-              className="w-20 rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+              className="w-20 rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             />
-            <span className="text-xs text-zinc-500">%  Score 5: above that</span>
+            <span className="text-xs text-ink-soft">%  Score 5: above that</span>
           </div>
-          <p className="text-xs text-zinc-500 mt-2">
+          <p className="text-xs text-ink-soft mt-2">
             Median (not mean) likes+comments ÷ followers over recent posts — median resists
             distortion from a single viral Reel.
           </p>
@@ -175,37 +175,37 @@ export default function ScoringSettingsForm({
           <label className="text-sm font-medium block mb-2">Composite weights</label>
           <div className="flex gap-4">
             <div>
-              <label className="text-xs text-zinc-500 block mb-1">Reach</label>
+              <label className="text-xs text-ink-soft block mb-1">Reach</label>
               <input
                 type="number"
                 step="0.1"
                 value={weightReach}
                 onChange={(e) => setWeightReach(e.target.value)}
-                className="w-20 text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+                className="w-20 text-sm rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
             <div>
-              <label className="text-xs text-zinc-500 block mb-1">Resonance</label>
+              <label className="text-xs text-ink-soft block mb-1">Resonance</label>
               <input
                 type="number"
                 step="0.1"
                 value={weightResonance}
                 onChange={(e) => setWeightResonance(e.target.value)}
-                className="w-20 text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+                className="w-20 text-sm rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
             <div>
-              <label className="text-xs text-zinc-500 block mb-1">Relevance</label>
+              <label className="text-xs text-ink-soft block mb-1">Relevance</label>
               <input
                 type="number"
                 step="0.1"
                 value={weightRelevance}
                 onChange={(e) => setWeightRelevance(e.target.value)}
-                className="w-20 text-sm rounded-md border border-zinc-300 dark:border-zinc-700 bg-transparent px-2 py-1"
+                className="w-20 text-sm rounded-md border border-line bg-surface text-ink px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
           </div>
-          <p className="text-xs text-zinc-500 mt-2">Equal weights (1/1/1) give a simple average.</p>
+          <p className="text-xs text-ink-soft mt-2">Equal weights (1/1/1) give a simple average.</p>
         </div>
 
         {!reviewing && (
@@ -213,19 +213,19 @@ export default function ScoringSettingsForm({
             <button
               onClick={() => setReviewing(true)}
               disabled={isPending || !changed}
-              className="rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-4 py-2 text-sm font-medium disabled:opacity-50"
+              className="rounded-md bg-primary hover:bg-primary-hover text-white px-4 py-2 text-sm font-medium disabled:opacity-50 disabled:hover:bg-primary transition-colors"
             >
               Review & save
             </button>
-            {saved && <span className="text-sm text-green-700 dark:text-green-400">Saved.</span>}
+            {saved && <span className="text-sm text-success-ink">Saved.</span>}
           </div>
         )}
       </div>
 
       {reviewing && (
-        <div className="rounded-lg border border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/30 p-6 space-y-4">
-          <h3 className="font-medium">Before you save</h3>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+        <div className="rounded-card border border-line border-l-4 border-l-primary bg-surface-muted shadow-card p-6 space-y-4">
+          <h3 className="font-medium text-ink">Before you save</h3>
+          <p className="text-sm text-ink-soft">
             {candidateCount} candidate(s) will be re-scored (Reach, Resonance, Composite) using
             the new thresholds/weights. This is a local recalculation from data already in your
             database — <strong>no external API calls, $0.00, instant.</strong>
@@ -234,14 +234,14 @@ export default function ScoringSettingsForm({
             <button
               onClick={confirmSave}
               disabled={isPending}
-              className="rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-4 py-2 text-sm font-medium disabled:opacity-50"
+              className="rounded-md bg-primary hover:bg-primary-hover text-white px-4 py-2 text-sm font-medium disabled:opacity-50 disabled:hover:bg-primary transition-colors"
             >
               {isPending ? "Saving…" : "Confirm & save"}
             </button>
             <button
               onClick={() => setReviewing(false)}
               disabled={isPending}
-              className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+              className="text-sm text-ink-soft hover:text-ink"
             >
               Cancel
             </button>

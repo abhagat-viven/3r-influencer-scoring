@@ -21,8 +21,8 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold">Your projects</h1>
-        <p className="text-zinc-500 mt-1">
+        <h1 className="text-2xl font-semibold text-ink">Your projects</h1>
+        <p className="text-ink-soft mt-1">
           Each project has its own following list and scoring settings. API keys (Apify,
           Anthropic) are shared across all of them — set once in any project&apos;s Settings.
         </p>
@@ -33,10 +33,10 @@ export default function ProjectsPage() {
           <Link
             key={p.id}
             href={`/projects/${p.id}`}
-            className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+            className="rounded-card border border-line bg-surface shadow-card p-6 hover:border-primary transition-colors"
           >
-            <div className="font-medium">{p.name}</div>
-            <div className="text-sm text-zinc-500 mt-1">
+            <div className="font-medium text-ink">{p.name}</div>
+            <div className="text-sm text-ink-soft mt-1">
               {(counts.get(p.id) ?? 0).toLocaleString()} accounts imported
             </div>
           </Link>

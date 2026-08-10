@@ -21,7 +21,7 @@ export default async function SettingsPage({
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-semibold">Settings</h1>
-        <p className="text-zinc-500 mt-1">
+        <p className="text-ink-soft mt-1">
           Three sections: Brand &amp; ICP (drives Relevance), 3R Scoring (Reach/Resonance
           thresholds + composite weights), and API Keys (Apify + Anthropic).
         </p>

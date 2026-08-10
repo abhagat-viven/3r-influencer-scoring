@@ -23,7 +23,7 @@ export default async function ImportPage({
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-semibold">Import</h1>
-        <p className="text-zinc-500 mt-1">
+        <p className="text-ink-soft mt-1">
           Upload your Instagram &quot;following&quot; data export, then review the
           keyword-flagged candidate shortlist before scraping.
         </p>
