@@ -33,6 +33,7 @@ export default function ProjectNav({ projectId }: { projectId: string }) {
           <Link
             key={item.label}
             href={href}
+            {...("href" in item ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className={
               active
                 ? "rounded-md px-3 py-1.5 bg-primary-soft text-primary-soft-ink font-medium"
