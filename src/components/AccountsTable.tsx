@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { updateAccountStatus, updateRelevanceManual } from "@/app/actions";
+import { accountsToCsv } from "@/lib/csv";
 import type { Account, Band } from "@/lib/types";
 
 type SortKey = "followers" | "reach_score" | "resonance_score" | "relevance_score" | "composite_score";
@@ -16,6 +17,30 @@ function fmt(v: number | null, decimals = 0): string {
 
 function fmtCount(n: number): string {
   return n >= 1000 ? `${n / 1000}K` : `${n}`;
+}
+
+type StoredFilters = {
+  sort?: SortKey;
+  dir?: "asc" | "desc";
+  followers?: number[];
+  status?: string[];
+};
+
+function storageKey(projectId: string): string {
+  return `accounts-filters:${projectId}`;
+}
+
+// Reads the last-used filter/sort state for this project. Used as a fallback
+// when the URL has none — e.g. after switching to another tab and back, since
+// the project nav links to a bare path with no query string.
+function loadStoredFilters(projectId: string): StoredFilters | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(storageKey(projectId));
+    return raw ? (JSON.parse(raw) as StoredFilters) : null;
+  } catch {
+    return null;
+  }
 }
 
 // Derives human-readable follower-range labels from the same bands used to score Reach,
@@ -45,20 +70,23 @@ export default function AccountsTable({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const stored = loadStoredFilters(projectId);
 
   const [sortKey, setSortKey] = useState<SortKey>(
-    () => (searchParams.get("sort") as SortKey | null) ?? "composite_score"
+    () => (searchParams.get("sort") as SortKey | null) ?? stored?.sort ?? "composite_score"
   );
   const [sortDir, setSortDir] = useState<"asc" | "desc">(
-    () => (searchParams.get("dir") as "asc" | "desc" | null) ?? "desc"
+    () => (searchParams.get("dir") as "asc" | "desc" | null) ?? stored?.dir ?? "desc"
   );
   const [followerFilters, setFollowerFilters] = useState<Set<number>>(() => {
     const raw = searchParams.get("followers");
-    return raw ? new Set(raw.split(",").map(Number)) : new Set();
+    if (raw) return new Set(raw.split(",").map(Number));
+    return new Set(stored?.followers ?? []);
   });
   const [statusFilters, setStatusFilters] = useState<Set<string>>(() => {
     const raw = searchParams.get("status");
-    return raw ? new Set(raw.split(",")) : new Set();
+    if (raw) return new Set(raw.split(","));
+    return new Set(stored?.status ?? []);
   });
   const [rows, setRows] = useState(accounts);
   const [, startTransition] = useTransition();
@@ -81,31 +109,58 @@ export default function AccountsTable({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openFilterMenu]);
 
-  // Keeps sort + filter state in the URL so it survives navigating away and back
-  // (the table is a client component and would otherwise reset on remount).
+  // Keeps sort + filter state in both the URL (for shareable/bookmarkable links)
+  // and localStorage (so it survives switching to another tab and back — the
+  // project nav links to a bare path with no query string, so the URL alone
+  // isn't enough once you've navigated away).
   function syncUrl(next: {
     sort?: SortKey;
     dir?: "asc" | "desc";
     followers?: Set<number>;
     status?: Set<string>;
   }) {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("sort", next.sort ?? sortKey);
-    params.set("dir", next.dir ?? sortDir);
+    const sort = next.sort ?? sortKey;
+    const dir = next.dir ?? sortDir;
     const followers = next.followers ?? followerFilters;
+    const status = next.status ?? statusFilters;
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sort", sort);
+    params.set("dir", dir);
     if (followers.size > 0) {
       params.set("followers", Array.from(followers).sort((a, b) => a - b).join(","));
     } else {
       params.delete("followers");
     }
-    const status = next.status ?? statusFilters;
     if (status.size > 0) {
       params.set("status", Array.from(status).sort().join(","));
     } else {
       params.delete("status");
     }
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(
+        storageKey(projectId),
+        JSON.stringify({
+          sort,
+          dir,
+          followers: Array.from(followers),
+          status: Array.from(status),
+        } satisfies StoredFilters)
+      );
+    }
   }
+
+  // If we landed here with no query string but restored filters/sort from a
+  // previous visit, reflect that back into the URL once so it's shareable —
+  // otherwise the address bar silently disagrees with what's on screen.
+  useEffect(() => {
+    if (!searchParams.get("sort") && !searchParams.get("followers") && !searchParams.get("status")) {
+      if (stored) syncUrl({});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function toggleRangeFilter(score: number) {
     const next = new Set(followerFilters);
@@ -145,6 +200,20 @@ export default function AccountsTable({
     });
     return copy;
   }, [rows, sortKey, sortDir, followerFilters, statusFilters]);
+
+  function exportCsv() {
+    const csv = accountsToCsv(sorted);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const date = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `influencer-candidates-${date}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 
   function toggleSort(key: SortKey) {
     const newDir = key === sortKey ? (sortDir === "desc" ? "asc" : "desc") : "desc";
@@ -204,6 +273,18 @@ export default function AccountsTable({
 
   return (
     <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-ink-soft">
+          {sorted.length.toLocaleString()} account{sorted.length === 1 ? "" : "s"}
+        </span>
+        <button
+          onClick={exportCsv}
+          className="rounded-md border border-line text-ink hover:bg-surface-muted px-3 py-1.5 text-sm font-medium"
+        >
+          Export CSV
+        </button>
+      </div>
+
       {(followerFilters.size > 0 || statusFilters.size > 0) && (
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
           {followerFilters.size > 0 && (

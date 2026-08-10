@@ -18,8 +18,11 @@ const COLUMNS: Array<{ key: keyof Account; label: string }> = [
 
 function escapeCsvValue(value: unknown): string {
   if (value === null || value === undefined) return "";
-  const str = String(value);
-  if (str.includes(",") || str.includes("\"") || str.includes("\n")) {
+  // Collapse embedded line breaks (common in bios/rationale) so every
+  // record is exactly one line — valid CSV allows newlines inside a quoted
+  // field, but it makes row count look inflated in a plain text viewer.
+  const str = String(value).replace(/\r\n|\r|\n/g, " ");
+  if (str.includes(",") || str.includes("\"")) {
     return `"${str.replace(/"/g, '""')}"`;
   }
   return str;

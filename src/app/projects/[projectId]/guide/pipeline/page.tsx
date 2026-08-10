@@ -58,7 +58,7 @@ export default async function PipelineGuidePage({
 
       <PrevNext
         prev={{ href: `${base}/import`, label: "Import" }}
-        next={{ href: `${base}/accounts`, label: "Accounts" }}
+        next={{ href: `${base}/scoring`, label: "How scoring works" }}
       />
     </div>
   );

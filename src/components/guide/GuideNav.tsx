@@ -8,6 +8,7 @@ export const GUIDE_SECTIONS = [
   { slug: "dashboard", label: "Dashboard" },
   { slug: "import", label: "Import" },
   { slug: "pipeline", label: "Pipeline" },
+  { slug: "scoring", label: "How scoring works" },
   { slug: "accounts", label: "Accounts" },
   { slug: "settings", label: "Settings" },
   { slug: "api-keys", label: "Bring your own API keys" },

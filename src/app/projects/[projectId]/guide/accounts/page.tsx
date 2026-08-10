@@ -43,7 +43,7 @@ export default async function AccountsGuidePage({
       </div>
 
       <PrevNext
-        prev={{ href: `${base}/pipeline`, label: "Pipeline" }}
+        prev={{ href: `${base}/scoring`, label: "How scoring works" }}
         next={{ href: `${base}/settings`, label: "Settings" }}
       />
     </div>

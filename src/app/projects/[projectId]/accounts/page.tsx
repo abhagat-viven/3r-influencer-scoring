@@ -1,7 +1,6 @@
 import { listAccounts, getSettings } from "@/db/queries";
 import { parseBands } from "@/lib/scoring";
 import AccountsTable from "@/components/AccountsTable";
-import ExportCsvButton from "@/components/ExportCsvButton";
 
 export const dynamic = "force-dynamic";
 
@@ -17,15 +16,12 @@ export default async function AccountsPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold">Accounts</h1>
-          <p className="text-ink-soft mt-1">
-            Candidate shortlist ranked by composite 3R score. Click a column to sort; edit
-            Relevance or status inline.
-          </p>
-        </div>
-        <ExportCsvButton projectId={projectId} />
+      <div>
+        <h1 className="text-2xl font-semibold text-ink">Accounts</h1>
+        <p className="text-ink-soft mt-1">
+          Candidate shortlist ranked by composite 3R score. Click a column to sort; edit
+          Relevance or status inline.
+        </p>
       </div>
       <AccountsTable projectId={projectId} accounts={accounts} reachBands={reachBands} />
     </div>
