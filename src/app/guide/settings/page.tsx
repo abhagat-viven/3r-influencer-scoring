@@ -1,13 +1,8 @@
 import { DocHeader, PrevNext } from "@/components/guide/DocBits";
 
-export default async function SettingsGuidePage({
-  params,
-}: {
-  params: Promise<{ projectId: string }>;
-}) {
-  const { projectId } = await params;
-  const base = `/projects/${projectId}/guide`;
+const base = "/guide";
 
+export default function SettingsGuidePage() {
   return (
     <div>
       <DocHeader

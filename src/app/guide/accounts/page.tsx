@@ -1,14 +1,9 @@
 import { DocHeader, MockFrame, PrevNext } from "@/components/guide/DocBits";
 import { AccountsTableMock } from "@/components/guide/mocks/AccountsTableMock";
 
-export default async function AccountsGuidePage({
-  params,
-}: {
-  params: Promise<{ projectId: string }>;
-}) {
-  const { projectId } = await params;
-  const base = `/projects/${projectId}/guide`;
+const base = "/guide";
 
+export default function AccountsGuidePage() {
   return (
     <div>
       <DocHeader

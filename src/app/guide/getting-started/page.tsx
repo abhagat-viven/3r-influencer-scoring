@@ -1,13 +1,8 @@
 import { DocHeader, Callout, PrevNext } from "@/components/guide/DocBits";
 
-export default async function GettingStartedPage({
-  params,
-}: {
-  params: Promise<{ projectId: string }>;
-}) {
-  const { projectId } = await params;
-  const base = `/projects/${projectId}/guide`;
+const base = "/guide";
 
+export default function GettingStartedPage() {
   return (
     <div>
       <DocHeader

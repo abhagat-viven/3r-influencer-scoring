@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NAV_ITEMS = [
+// Everything except Guide is scoped to the current project (a relative
+// segment appended to /projects/[projectId]). Guide is plain informational
+// content with no project-specific data, so it lives at a fixed, public
+// /guide URL instead — same page whichever project you're in.
+const NAV_ITEMS: Array<{ segment: string; label: string } | { href: string; label: string }> = [
   { segment: "", label: "Dashboard" },
   { segment: "/import", label: "Import" },
   { segment: "/pipeline", label: "Pipeline" },
   { segment: "/accounts", label: "Accounts" },
   { segment: "/settings", label: "Settings" },
-  { segment: "/guide", label: "Guide" },
+  { href: "/guide", label: "Guide" },
 ];
 
 export default function ProjectNav({ projectId }: { projectId: string }) {
@@ -18,10 +22,13 @@ export default function ProjectNav({ projectId }: { projectId: string }) {
   return (
     <nav className="flex gap-1 text-sm">
       {NAV_ITEMS.map((item) => {
-        const href = `/projects/${projectId}${item.segment}`;
-        const active = item.segment
-          ? pathname.startsWith(href)
-          : pathname === `/projects/${projectId}`;
+        const href = "href" in item ? item.href : `/projects/${projectId}${item.segment}`;
+        const active =
+          "href" in item
+            ? pathname.startsWith(item.href)
+            : item.segment
+              ? pathname.startsWith(href)
+              : pathname === `/projects/${projectId}`;
         return (
           <Link
             key={item.label}

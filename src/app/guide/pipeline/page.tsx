@@ -1,13 +1,8 @@
 import { DocHeader, Callout, PrevNext } from "@/components/guide/DocBits";
 
-export default async function PipelineGuidePage({
-  params,
-}: {
-  params: Promise<{ projectId: string }>;
-}) {
-  const { projectId } = await params;
-  const base = `/projects/${projectId}/guide`;
+const base = "/guide";
 
+export default function PipelineGuidePage() {
   return (
     <div>
       <DocHeader

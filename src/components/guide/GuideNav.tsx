@@ -14,13 +14,13 @@ export const GUIDE_SECTIONS = [
   { slug: "api-keys", label: "Bring your own API keys" },
 ];
 
-export default function GuideNav({ projectId }: { projectId: string }) {
+export default function GuideNav() {
   const pathname = usePathname();
 
   return (
     <nav className="space-y-1 text-sm">
       {GUIDE_SECTIONS.map((s) => {
-        const href = `/projects/${projectId}/guide/${s.slug}`;
+        const href = `/guide/${s.slug}`;
         const active = pathname === href;
         return (
           <Link

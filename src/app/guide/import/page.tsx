@@ -1,14 +1,9 @@
 import { DocHeader, MockFrame, PrevNext } from "@/components/guide/DocBits";
 import { ImportMock } from "@/components/guide/mocks/ImportMock";
 
-export default async function ImportGuidePage({
-  params,
-}: {
-  params: Promise<{ projectId: string }>;
-}) {
-  const { projectId } = await params;
-  const base = `/projects/${projectId}/guide`;
+const base = "/guide";
 
+export default function ImportGuidePage() {
   return (
     <div>
       <DocHeader
