@@ -11,7 +11,7 @@ export function DocHeader({ title, description }: { title: string; description: 
 
 export function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-md border-l-4 border-l-primary bg-surface-muted px-4 py-3 text-sm text-ink-soft">
+    <div className="rounded-md border border-line-strong bg-surface-muted px-4 py-3 text-sm text-ink-soft">
       {children}
     </div>
   );

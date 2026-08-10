@@ -223,7 +223,7 @@ export default function ScoringSettingsForm({
       </div>
 
       {reviewing && (
-        <div className="rounded-card border border-line border-l-4 border-l-primary bg-surface-muted shadow-card p-6 space-y-4">
+        <div className="rounded-card border border-line-strong bg-surface-muted shadow-card p-6 space-y-4">
           <h3 className="font-medium text-ink">Before you save</h3>
           <p className="text-sm text-ink-soft">
             {candidateCount} candidate(s) will be re-scored (Reach, Resonance, Composite) using

@@ -14,14 +14,16 @@
   --color-surface: #ffffff;
   --color-surface-muted: #eef2fa;
 
-  /* Lines */
-  --color-line: #dce3ef;
-  --color-line-strong: #b9c4d9;
+  /* Lines — line-strong is for anything a user needs to actually perceive as
+     a boundary (inputs, selects, buttons); line is decorative dividers only. */
+  --color-line: #b3c1d8;
+  --color-line-strong: #7c8ba3;
 
-  /* Text */
+  /* Text — ink-faint stays ≥4.5:1 on both canvas and surface (checked), so it
+     never gets used for real content that fails to meet AA contrast. */
   --color-ink: #101828;
   --color-ink-soft: #47536b;
-  --color-ink-faint: #8a94a8;
+  --color-ink-faint: #647089;
 
   /* Brand blue — the one accent. Hover is a fixed darker step, not an
      opacity trick, so it stays crisp on any surface. */
@@ -54,6 +56,13 @@
 body {
   background: var(--color-canvas);
   color: var(--color-ink);
+}
+
+/* Exactly three font weights in this app: 400 (body default), 500
+   (font-medium — labels, buttons, nav), 600 (font-semibold — headings).
+   <strong> defaults to the browser's bold (700), which would be a fourth. */
+strong {
+  font-weight: 600;
 }
 
 ::selection {
